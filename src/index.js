@@ -1,14 +1,10 @@
 const express =  require('express');
+const professorRouter = require('./rotas/professor');
+const cursoRouter = require('./rotas/curso');
 
 const app = express();
 
-app.get('/professor', (req, res) => {
-    return res.send('[GET] Professor');
-});
-
-app.post('/professor', (req, res) => {
-    return res.send('[POST] Professor');
-});
+app.use([professorRouter, cursoRouter]);
 
 app.listen(8080, () => {
     console.log('Server está executando na porta 8080');
