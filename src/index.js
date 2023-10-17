@@ -1,6 +1,7 @@
 const express =  require('express');
 const professorRouter = require('./rotas/professor');
 const cursoRouter = require('./rotas/curso');
+const alunoRouter = require('./rotas/aluno');
 
 const app = express();
 
