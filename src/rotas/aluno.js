@@ -1,25 +1,14 @@
 const express = require('express');
+const controlador = require('../controladores/aluno');
 
 const router = express.Router();
 
-router.get('/aluno', (req, res) => {
-    res.send('[GET] Aluno');
-    }
-);
+router.get('/aluno', controlador.get);
 
-router.post('/aluno', (req, res) => {
-    res.send('[POST] Aluno');
-    }
-);
+router.post('/aluno', controlador.post);
 
-router.delete('/aluno', (req, res) => {
-    res.send('[DELETE] Aluno');
-    }
-);
+router.delete('/aluno', controlador.delete);
 
-router.patch('/aluno', (req, res) => {
-    res.send('[PATCH] Aluno');
-    }
-);
+router.patch('/aluno', controlador.patch);
 
 module.exports = router;

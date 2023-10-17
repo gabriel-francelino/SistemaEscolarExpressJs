@@ -1,25 +1,14 @@
 const express = require('express');
+const controlador = require('../controladores/curso');
 
 const router = express.Router();
 
-router.get('/curso', (req, res) => {
-    res.send('[GET] Curso');
-    }
-);
+router.get('/curso', controlador.get);
 
-router.post('/curso', (req, res) => {
-    res.send('[POST] Curso');
-    }
-);
+router.post('/curso', controlador.post);
 
-router.delete('/curso', (req, res) => {
-    res.send('[DELETE] Curso');
-    }
-);
+router.delete('/curso', controlador.delete);
 
-router.patch('/curso', (req, res) => {
-    res.send('[PATCH] Curso');
-    }
-);
+router.patch('/curso', controlador.patch);
 
 module.exports = router;
