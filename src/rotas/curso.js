@@ -6,4 +6,6 @@ router.get('/curso', (req, res) => {
     res.send('[GET] Curso');
     }
 );
+
+
 module.exports = router;
