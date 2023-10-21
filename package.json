@@ -18,9 +18,13 @@
   "author": "Gabriel Francelino Nascimento",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.4.2",
     "express": "^4.18.2",
     "morgan": "^1.10.0",
-    "nodemon": "^3.0.1",
     "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "prisma": "^5.4.2"
   }
 }
