@@ -12,6 +12,6 @@ router.post('/aluno', Controlador.create);
 
 router.delete('/aluno/:id', Controlador.delete);
 
-router.patch('/aluno', Controlador.patch);
+router.patch('/aluno/:id', Controlador.update);
 
 module.exports = router;

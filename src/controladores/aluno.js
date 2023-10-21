@@ -32,7 +32,10 @@ module.exports = {
         const alunoDeletado = await Service.delete(+id);
         return res.json(alunoDeletado);
     },
-    patch: (req, res) => {
-        return res.send('[PATCH] Aluno');
+    update: async (req, res) => {
+        const {id} = req.params;
+        const parcialAluno = req.body;
+        const alunoAtualizado = await Service.update(+id, parcialAluno);
+        return res.json(alunoAtualizado);
     }
 };

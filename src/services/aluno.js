@@ -35,5 +35,16 @@ module.exports = {
         })
 
         return alunoDeletado;
+    },
+
+    update: async (id, parcialAluno) => {
+        const alunoAtualizado = await prismaClient.aluno.update({
+            where: {
+                id
+            },
+            data: parcialAluno
+        });
+
+        return alunoAtualizado;
     }
 };
