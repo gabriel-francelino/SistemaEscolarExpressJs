@@ -10,5 +10,20 @@ module.exports = {
         });
 
         return alunoCriado;
-    }
+    },
+
+    getAll: async () => {
+        const alunos = await prismaClient.aluno.findMany();
+        return alunos;
+    },
+
+    // getById: async (id) => {
+    //     const aluno = await prismaClient.aluno.findUnique({
+    //         // where: {
+    //         //     id: Number(id),
+    //         // }
+    //     });
+
+    //     return aluno;
+    // }
 };
