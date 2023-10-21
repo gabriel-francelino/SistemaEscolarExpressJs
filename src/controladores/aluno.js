@@ -27,8 +27,10 @@ module.exports = {
             // return res.status(400).json(error);
         }
     },
-    delete: (req, res) => {
-        return res.send('[DELETE] Aluno');
+    delete: async (req, res) => {
+        const {id} = req.params;
+        const alunoDeletado = await Service.delete(+id);
+        return res.json(alunoDeletado);
     },
     patch: (req, res) => {
         return res.send('[PATCH] Aluno');

@@ -25,5 +25,15 @@ module.exports = {
         })
 
         return aluno
+    },
+
+    delete: async (id) => {
+        const alunoDeletado = await prismaClient.aluno.delete({
+            where: {
+                id,
+            }
+        })
+
+        return alunoDeletado;
     }
 };

@@ -10,7 +10,7 @@ router.get('/aluno/:id', Controlador.getById);
 
 router.post('/aluno', Controlador.create);
 
-router.delete('/aluno', Controlador.delete);
+router.delete('/aluno/:id', Controlador.delete);
 
 router.patch('/aluno', Controlador.patch);
 
