@@ -1,6 +1,6 @@
 const prisma = require('@prisma/client');
 
-const prismaClient =  new prisma.PrismaClient();
+const prismaClient = new prisma.PrismaClient();
 
 module.exports = {
     create: async (aluno) => {
@@ -17,13 +17,13 @@ module.exports = {
         return alunos;
     },
 
-    // getById: async (id) => {
-    //     const aluno = await prismaClient.aluno.findUnique({
-    //         // where: {
-    //         //     id: Number(id),
-    //         // }
-    //     });
+    getById: async (id) => {
+        const aluno = await prismaClient.aluno.findUnique({
+            where: {
+                id,
+            }
+        })
 
-    //     return aluno;
-    // }
+        return aluno
+    }
 };

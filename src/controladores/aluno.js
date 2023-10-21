@@ -1,11 +1,11 @@
 const Service = require('../services/aluno');
 
 module.exports = {
-    // getById: async (req, res) => {
-    //     const {id} = req.params;
-    //     const aluno = await Service.getById(id);
-    //     return res.json(aluno);
-    // },
+    getById: async (req, res) => {
+        const {id} = req.params;
+        const aluno = await Service.getById(+id);
+        return res.json(aluno);
+    },
     getAll: async (req, res) => {
         console.log('getAll');
         try {
