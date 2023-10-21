@@ -17,6 +17,7 @@ model Aluno {
   u_nome        String
   ra            String
   matriculas    Matricula[]
+  @@unique([ra])
 }
 
 model Professor {

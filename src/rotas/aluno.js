@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/aluno', controlador.get);
 
-router.post('/aluno', controlador.post);
+router.post('/aluno', controlador.create);
 
 router.delete('/aluno', controlador.delete);
 
