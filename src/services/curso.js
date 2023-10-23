@@ -54,12 +54,12 @@ module.exports = {
         return cursoDeletado;
     },
 
-    update: async (id, parcialcurso) => {
+    update: async (id, parcialCurso) => {
         const cursoAtualizado = await prismaClient.curso.update({
             where: {
                 id
             },
-            data: parcialcurso
+            data: parcialCurso
         });
 
         return cursoAtualizado;

@@ -1,19 +1,27 @@
 const prisma = require('@prisma/client');
+const { buildTelefonePrismaQuery } = require('../utils');
 
 const prismaClient = new prisma.PrismaClient();
 
 module.exports = {
-    create: async (aluno) => {
-        console.log(aluno);
+    create: async ({ telefones, ...aluno }) => {
         const alunoCriado = await prismaClient.aluno.create({
-            data: aluno,
+            data: { ...aluno, telefones: buildTelefonePrismaQuery(telefones) }
         });
 
         return alunoCriado;
     },
 
     getAll: async () => {
-        const alunos = await prismaClient.aluno.findMany();
+        const alunos = await prismaClient.aluno.findMany({
+            include: {
+                telefones: {
+                    select: {
+                        telefone: true
+                    }
+                }
+            }
+        });
         return alunos;
     },
 
@@ -21,6 +29,13 @@ module.exports = {
         const aluno = await prismaClient.aluno.findUnique({
             where: {
                 id,
+            },
+            include: {
+                telefones: {
+                    select: {
+                        telefone: true
+                    }
+                }
             }
         })
 
@@ -37,12 +52,15 @@ module.exports = {
         return alunoDeletado;
     },
 
-    update: async (id, parcialAluno) => {
+    update: async (id, { telefones, ...parcialAluno }) => {
         const alunoAtualizado = await prismaClient.aluno.update({
             where: {
                 id
             },
-            data: parcialAluno
+            data: {
+                ...parcialAluno,
+                telefones: buildTelefonePrismaQuery(telefones)
+            }
         });
 
         return alunoAtualizado;

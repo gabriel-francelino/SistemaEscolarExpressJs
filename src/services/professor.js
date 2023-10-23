@@ -1,12 +1,12 @@
 const prisma = require('@prisma/client');
+const { buildTelefonePrismaQuery } = require('../utils');
 
 const prismaClient = new prisma.PrismaClient();
 
 module.exports = {
-    create: async (professor) => {
-        console.log(professor);
+    create: async ({ telefones, ...professor }) => {
         const professorCriado = await prismaClient.professor.create({
-            data: professor,
+            data: { ...professor, telefones: buildTelefonePrismaQuery(telefones) }
         });
 
         return professorCriado;
@@ -37,12 +37,15 @@ module.exports = {
         return professorDeletado;
     },
 
-    update: async (id, parcialprofessor) => {
+    update: async (id, {telefones, ...parcialProfessor}) => {
         const professorAtualizado = await prismaClient.professor.update({
             where: {
                 id
             },
-            data: parcialprofessor
+            data: {
+                ...parcialProfessor,
+                telefones: buildTelefonePrismaQuery(telefones)
+            }
         });
 
         return professorAtualizado;
