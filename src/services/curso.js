@@ -13,7 +13,16 @@ module.exports = {
     },
 
     getAll: async () => {
-        const cursos = await prismaClient.curso.findMany();
+        const cursos = await prismaClient.curso.findMany({
+            include: {
+                professor: {
+                    select: {
+                        p_nome: true,
+                        u_nome: true
+                    }
+                }
+            }
+        });
         return cursos;
     },
 
@@ -21,6 +30,14 @@ module.exports = {
         const curso = await prismaClient.curso.findUnique({
             where: {
                 id,
+            },
+            include: {
+                professor: {
+                    select: {
+                        p_nome: true,
+                        u_nome: true
+                    }
+                }
             }
         })
 
