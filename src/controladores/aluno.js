@@ -2,9 +2,17 @@ const Service = require('../services/aluno');
 
 module.exports = {
     getById: async (req, res) => {
-        const {id} = req.params;
-        const aluno = await Service.getById(+id);
-        return res.json(aluno);
+        try {
+            const { id } = req.params;
+            const aluno = await Service.getById(+id);
+            if (!aluno) {
+                throw new Error('aluno não encontrado');
+            }
+            return res.json(aluno);
+
+        } catch (error) {
+            return res.status(404).send(error.message);
+        }
     },
     getAll: async (req, res) => {
         console.log('getAll');

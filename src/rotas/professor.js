@@ -1,14 +1,16 @@
 const express = require('express');
-const controlador = require('../controladores/professor');
+const Controlador = require('../controladores/professor');
 
 const router = express.Router();
 
-router.get('/professor', controlador.get);
+router.post('/professor', Controlador.create);
 
-router.post('/professor', controlador.post);
+router.get('/professor/', Controlador.getAll);
 
-router.delete('/professor', controlador.delete);
+router.get('/professor/:id', Controlador.getById);
 
-router.patch('/professor', controlador.patch);
+router.delete('/professor/:id', Controlador.delete);
+
+router.patch('/professor/:id', Controlador.update);
 
 module.exports = router;
