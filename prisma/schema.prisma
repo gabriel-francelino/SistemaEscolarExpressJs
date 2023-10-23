@@ -11,37 +11,50 @@ datasource db {
 }
 
 model Aluno {
-  id  Int @id @default(autoincrement())
-  p_nome        String
-  m_nome        String
-  u_nome        String
-  ra            String
-  matriculas    Matricula[]
+  id         Int         @id @default(autoincrement())
+  p_nome     String
+  m_nome     String
+  u_nome     String
+  ra         String
+  matriculas Matricula[]
+  telefones  Telefone[]
+
   @@unique([ra])
 }
 
 model Professor {
-  id  Int @id @default(autoincrement())
-  p_nome        String
-  m_nome        String
-  u_nome        String
-  salario       Float   @default(0)
-  cursos        Curso[]
+  id        Int        @id @default(autoincrement())
+  p_nome    String
+  m_nome    String
+  u_nome    String
+  salario   Float      @default(0)
+  cursos    Curso[]
+  telefones Telefone[]
+}
+
+model Telefone {
+  telefone     String     @id
+  aluno_id     Int?
+  professor_id Int?
+  professor    Professor? @relation(fields: [professor_id], references: [id], onDelete: Cascade)
+  aluno        Aluno?     @relation(fields: [aluno_id], references: [id])
 }
 
 model Curso {
-  id  Int @id @default(autoincrement())
-  nome          String
-  duracao       Int @default(0)
-  professor_id   Int
-  professor     Professor @relation(fields: [professor_id], references: [id])
-  matriculas    Matricula[]
+  id           Int         @id @default(autoincrement())
+  nome         String
+  duracao      Int         @default(0)
+  professor_id Int
+  professor    Professor   @relation(fields: [professor_id], references: [id])
+  matriculas   Matricula[]
 }
 
 model Matricula {
-  curso_id      Int
-  aluno_id      Int
-  aluno Aluno @relation(fields: [aluno_id], references: [id], onDelete: Restrict)
-  curso Curso @relation(fields: [curso_id], references: [id], onDelete: Restrict)
+  curso_id  Int
+  aluno_id  Int
+  progresso Float
+  aluno     Aluno @relation(fields: [aluno_id], references: [id], onDelete: Restrict)
+  curso     Curso @relation(fields: [curso_id], references: [id], onDelete: Restrict)
+
   @@unique([curso_id, aluno_id], name: "matricula_id")
 }
