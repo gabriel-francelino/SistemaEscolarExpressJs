@@ -1,10 +1,14 @@
-const prisma = require('@prisma/client');
+const prisma = require("@prisma/client");
 
 const prismaClient = new prisma.PrismaClient();
 
 module.exports = {
     create: async (curso) => {
-        console.log(curso);
+        await prismaClient.professor.findUniqueOrThrow({
+            where: {
+                id: matricula.professor_id,
+            },
+        });
         const cursoCriado = await prismaClient.curso.create({
             data: curso,
         });
@@ -18,10 +22,10 @@ module.exports = {
                 professor: {
                     select: {
                         p_nome: true,
-                        u_nome: true
-                    }
-                }
-            }
+                        u_nome: true,
+                    },
+                },
+            },
         });
         return cursos;
     },
@@ -35,33 +39,41 @@ module.exports = {
                 professor: {
                     select: {
                         p_nome: true,
-                        u_nome: true
-                    }
-                }
-            }
-        })
+                        u_nome: true,
+                    },
+                },
+            },
+        });
 
-        return curso
+        return curso;
     },
 
     delete: async (id) => {
         const cursoDeletado = await prismaClient.curso.delete({
             where: {
                 id,
-            }
-        })
+            },
+        });
 
         return cursoDeletado;
     },
 
     update: async (id, parcialCurso) => {
+        if(parcialCurso.professor_id) {
+            await prismaClient.professor.findUniqueOrThrow({
+                where: {
+                    id: parcialCurso.professor_id,
+                },
+            });
+        }
+
         const cursoAtualizado = await prismaClient.curso.update({
             where: {
-                id
+                id,
             },
-            data: parcialCurso
+            data: parcialCurso,
         });
 
         return cursoAtualizado;
-    }
+    },
 };
